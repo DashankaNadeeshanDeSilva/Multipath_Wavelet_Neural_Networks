@@ -10,7 +10,7 @@ mnist = input_data.read_data_sets("/Data/MINST/", one_hot=True)
 
 # Parameters
 training_epochs = 100
-batch_size = 100
+batch_size = 200
 num_steps = 60000 // batch_size
 display_step = 100
 
@@ -36,7 +36,7 @@ X = tf.placeholder("float", [None, num_input])  # (128,784)
 Y = tf.placeholder("float", [None, num_classes])  # (128,10)
 learning_rate = tf.placeholder("float", [])
 
-
+# Learning rate decay with the num of epochs
 def learaning_rate_decay(epochs):
     Learning_rate = 0.001
     if epochs < 5:
@@ -75,7 +75,7 @@ biases = {
     'bo': tf.Variable(tf.random_normal([num_classes]))
 }
 
-# Wavelet parameters
+# Wavelet parameters alpha and beta
 alpha_1_1 = tf.Variable(tf.truncated_normal(shape=[], mean=0.0, stddev=0.5))
 beta_1_1 = tf.Variable(tf.truncated_normal(shape=[], mean=0.0, stddev=0.5))
 alpha_1_2 = tf.Variable(tf.truncated_normal(shape=[], mean=0.0, stddev=0.5))
